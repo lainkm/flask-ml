@@ -1,0 +1,291 @@
+{% extends "base_layout.html"%}
+{% block body %}
+	<div class="tpl-page-container tpl-page-header-fixed">
+        <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                功能列表
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                    <li class="tpl-left-nav-item">
+                        <a href="/user_info" class="nav-link active">
+                            <i class="am-icon-home"></i>
+                            <span>个人信息</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/search_book_user" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>书刊检索</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/borrow_info" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>借书情况</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/renew_manage" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>续借管理</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/overdue_payment" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>超期缴费</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/history_info" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>读书记录</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+    <div class="tpl-content-wrapper">
+        <div class="tpl-block">
+            <div class="am-g">
+                {% if types == 0 %}
+                    <div class="am-u-sm-12">
+                
+                             <table class="am-table am-table-striped am-table-hover table-main">
+
+                                <tbody>
+                                <form class="am-form" action="" method="post" onsubmit="return confirm('确认要提交吗?');">
+                                            <tr>学号：<input type="text" name="id" value="{{posts.借书证号}}" readonly></tr><br>
+                                            <tr>姓名：<input type="text" name="name" value="{{posts.姓名}}" {{readonly}}></tr><br>
+                                            <tr>性别：<input type="text" name="sex" value="{{posts.性别}}" {{readonly}}></tr><br>
+                                            <tr>读者类型：<input type="text" name="kind" value="{{posts.读者类型}}" {{readonly}}></tr><br>
+                                            <tr>专业：<input type="text" name="major" value="{{posts.专业}}" {{readonly}}></tr> <br>
+                                            <tr>年级：<input type="text" name="grade" value="{{posts.年级}}" {{readonly}}></tr><br>
+                                            <tr>联系方式：<input type="text" name="tel" value="{{posts.联系方式}}" {{readonly}}></tr><br> 
+                                    
+                                        <tr>
+                                            <td>
+                                                <input type="submit" name="sub" value="修改">
+                                            </td>
+                                            <td>
+                                                <input type="submit" name="sub" value="保存">
+                                            </td>
+                                        </tr>
+                                </form>
+                                </tbody>
+                                 </table>
+                       
+                {% elif types == 3 %}
+                    <div class="am-u-sm-12">
+                       <table class="am-table am-table-striped am-table-hover table-main">
+                                    {% for post in posts %}
+                                <thead>
+                                    <tr>
+                                        
+                                        <th colspan="7">您借的{{post.书名}},即将在{{post.应还日期}}到期，请及时还书或续借！</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="table-id">借书证号</th>
+                                        <th class="table-title">姓名</th>
+                                        <th class="table-title">图书ID</th>
+                                        <th class="table-type">书名</th>
+                                        <th class="table-author am-hide-sm-only">借阅日期</th>
+                                        <th class="table-type">应还日期</th>
+                                        <th class="table-type">续借次数</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                        <form class="am-form" action="" method="post">
+                                            <tr>
+                                                <td><input type="" name="r_id" value="{{post.借书证号}}"></td>
+                                                <td><a>{{post.姓名}}</a></td>
+                                                <td><input type="text" name="id" value="{{post.图书ID}}"></td>
+                                                <td><a>{{post.书名}}</a></td>
+                                                <td>{{post.借阅日期}}</td>
+                                                <td>{{post.应还日期}}</td>
+                                                <td>{{post.续借次数}}</td>
+
+                                                <td><input type="submit" name="sub" value="续借"></td>
+                                                 <td><input type="submit" name="sub" value="还书"></td>
+
+                                        </form>
+                                   {% endfor %}
+                                </tbody>
+                            </table>     
+
+
+                    </div>
+                {% elif types == 2 %}
+                    <div class="am-u-sm-12">
+                       <table class="am-table am-table-striped am-table-hover table-main">
+                                <thead>
+                                    <tr>
+                                        <th class="table-id">借书证号</th>
+                                        <th class="table-title">姓名</th>
+                                        <th class="table-title">图书ID</th>
+                                        <th class="table-type">书名</th>
+                                        <th class="table-author am-hide-sm-only">借阅日期</th>
+                                        <th class="table-type">应还日期</th>
+                                        <th class="table-type">续借次数</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for post in posts %}
+                                        <form class="am-form" action="" method="post">
+                                            <tr>
+                                                <td><input type="" name="r_id" value="{{post.借书证号}}"></td>
+                                                <td><a>{{post.姓名}}</a></td>
+                                                <td><input type="text" name="id" value="{{post.图书ID}}"></td>
+                                                <td><a>{{post.书名}}</a></td>
+                                                <td>{{post.借阅日期}}</td>
+                                                <td>{{post.应还日期}}</td>
+                                                <td>{{post.续借次数}}</td>
+
+                                                <td><input type="submit" name="sub" value="续借"></td>
+                                                
+                                                 <td><input type="submit" name="sub" value="还书"></td>
+                                        </form>
+                                   {% endfor %}
+                                </tbody>
+                            </table>     
+
+
+                    </div>
+                {% elif types == 1 %}
+                    <div class="am-u-sm-12">
+
+                              <form action="" method="POST">
+                                <tr>
+
+                                <td>
+                                     <input type="text" name="content" value="">
+                                </td>
+                                <td>
+                                    <input type="submit" name="sub" value="搜索">
+                                </td><br>
+
+                                
+                                    </tr>
+                                  </form> 
+                        </div> 
+                {% elif types == 4 %}
+                    <div class="am-u-sm-12">
+                       <table class="am-table am-table-striped am-table-hover table-main">
+                                <thead>
+                                    <tr>
+                                        <th class="table-title">图书ID</th>
+                                        <th class="table-type">书名</th>
+                                        <th class="table-author am-hide-sm-only">借阅日期</th>
+                                        <th class="table-type">还书日期</th>
+                                        <th class="table-type">续借次数</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for post in posts %}
+                                        <form class="am-form" action="" method="post">
+                                            <tr>
+                                                <td><input type="text" name="id" value="{{post.图书ID}}"></td>
+                                                <td><a>{{post.书名}}</a></td>
+                                                <td>{{post.借阅日期}}</td>
+                                                <td>{{post.还书日期}}</td>
+                                                <td>{{post.续借次数}}</td>
+                                                <td><input type="submit" name="sub" value="交费"></td>
+
+                                        </form>
+                                   {% endfor %}
+                                </tbody>
+                            </table>     
+
+
+                    </div>
+                {% elif types == 6 %}
+                    <form action="" method="post">  
+                        <input type="submit" name="button" value="数据库备份到本地">
+                    </form>
+                {% elif types == 7 %}
+                     <div class="am-u-sm-12">
+
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                <thead>
+                                    <tr>
+                
+                                        <th class="table-id">图书ID</th>
+                                        <th class="table-title">图书分类号</th>
+                                        <th class="table-title">书名</th>
+
+                                        <th class="table-type">作者</th>
+                                        <th class="table-author am-hide-sm-only">出版社</th>
+                                        <th class="table-type">出版时间</th>
+                                        <th class="table-type">馆藏复本</th>
+                                        <th class="table-type">可借复本</th>
+
+                                    
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for post in posts %}
+                        <div class="am-u-sm-12">
+
+                            <form class="am-form" action="" method="post">
+                                        <tr>
+
+                                            <td>{{post.图书ID}}</td>
+                                            <td>{{post.图书分类号}}</td>
+                                            <td><a href="/xiangxixinxi/{{post.图书ID}}">{{post.书名}}</a></td>
+                                            <td><a>{{post.作者}}</a></td>
+                                            <td>{{post.出版社}}</td>
+                                            <td>{{post.出版时间}}</td>
+                                            <td>{{post.馆藏复本}}</td>
+                                            <td>{{post.可借复本}}</td>
+                                        
+                                        </tr>
+                            </form>
+                                       {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                {% elif types == 10 %}
+                <p>
+                    从您成为本图书馆用户的那天起，这份书单就开始记录着您成长的点滴，并不断变长<a href="/history_info_plus">生成个人书单</a><br>
+
+                    您在{{post.借阅日期}}借了第一本书{{post.书名}}，直到现在，您已经借了{{num}}本书了，您是不是迫不及待想看看这份值属于您的历史书单呢，赶紧查查看吧！
+                </p>
+                {% elif types == 11 %}
+                <p>
+                    {% for post in posts %}
+                        <td>{{post.图书ID}}</td>
+                        <td><a>{{post.书名}}</a></td>
+                        <td>{{post.借阅日期}}</a></td>
+                        <br>
+
+                    {% endfor %}
+                </p>
+                {% else %}
+                    <div class="tpl-portlet-components"  >
+                        <h1 align="center">欢迎登录&nbsp;&nbsp;<span style="font-size: 35px;color: #0e90d2">读者</span>&nbsp;&nbsp;图书管理系统</h1>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="tpl-alert"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

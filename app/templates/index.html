@@ -1,0 +1,229 @@
+{% extends "base_layout.html" %}
+{% block body %}
+	<div class="tpl-page-container tpl-page-header-fixed">
+        <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                Hello!
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                    <li class="tpl-left-nav-item">
+                        <a href="/index_info" class="nav-link active">
+                            <i class="am-icon-home"></i>
+                            <span>首页</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/search_book_index" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>书刊检索</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="https://www.baidu.com" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>在线读书</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/lib_info" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>图书馆概况</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/new_info" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>最新资讯</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/tutorial" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>服务指南</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/english" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>英文版</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+
+        </div>
+
+        <div class="tpl-content-wrapper">
+            
+            <div class="tpl-portlet-components"  >
+                    <h1 align="center">欢迎登录 图书管理系统</h1>
+
+                </div>
+                <div class="tpl-block">
+                    
+                    <div class="am-g">
+
+                        {% if types == 1 %}
+                         <div class="am-u-sm-12">
+                            <br>
+                                <a href="https://www.baidu.com">毛泽东文选</a>&nbsp;&nbsp;
+                                <a href="https://www.baidu.com">活着</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a href="https://www.baidu.com">java Web从入门到放弃</a><br>
+                                <p><a href="https://www.baidu.com">三体</a>&nbsp;
+                                <a href="https://www.baidu.com">他的国</a>
+
+
+                              <form action="" method="POST">
+                              	<tr>
+
+                              	<td>
+                                     <input type="text" name="content" value="">
+                                </td>
+                                <td>
+                                    <input type="submit" name="sub" value="搜索">
+                                </td><br>
+
+                              
+                                </tr>
+                              </form>  
+                               
+                            </div>
+                        {% elif types == 2 %}
+                         <div class="am-u-sm-12">
+                                <div>
+                                	<p>
+                                		图书馆管理系统是居于python-flask搭建，
+                                		可以使用原生的语句活着orm，实现了数据库的增查删改
+                                		触发器：同步删除，删除读者会触发事前触发器，判断借书表，如果没哟借书表可以直接对还书表上的历史记录进行删除，如果借书表里有被借的书，返回错误信息提示不能删除，并自动向读者发送邮件进行还书
+                                	</p>
+                                </div>
+
+                         </div>
+                         {% elif types == 3 %}
+                         <div class="am-u-sm-12">
+                                <div>
+                                	<p>
+                                		新增图书
+                                	</p>
+                                </div>
+
+                         </div>
+                         {% elif types == 4 %}
+                         <div class="am-u-sm-12">
+                                <div>
+                                	<p>
+                                		服务指南
+                                	</p>
+                                </div>
+
+                         </div>
+                       
+                        {% elif types == 5 %}
+                         <div class="am-u-sm-12">
+                                <div>
+                                	<p>
+                                		nihao
+                                        <br><br><br><br><br><br><br><br><br><br>
+
+                                        <br><br><br><br><br><br><br>
+                                        <br><br><br><br><br>
+                                        <br><br><br><br><br><br><br><br><br><br>
+                                         pengyou
+                                	</p>
+                                </div>
+
+                         </div>
+                       {% elif types == 7 %}
+                         <table class="am-table am-table-striped am-table-hover table-main">
+                                <thead>
+                                    <tr>
+                
+                                        <th class="table-id">图书ID</th>
+                                        <th class="table-title">图书分类号</th>
+                                        <th class="table-title">书名</th>
+
+                                        <th class="table-type">作者</th>
+                                        <th class="table-author am-hide-sm-only">出版社</th>
+                                        <th class="table-type">出版时间</th>
+                                        <th class="table-type">馆藏复本</th>
+                                        <th class="table-type">可借复本</th>
+
+                                    
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for post in posts %}
+                        <form class="am-form" action="" method="post">
+                                    <tr>
+
+                                        <td>{{post.图书ID}}</td>
+                                        <td>{{post.图书分类号}}</td>
+                                        <td><a>{{post.书名}}</a></td>
+                                        <td><a>{{post.作者}}</a></td>
+                                        <td>{{post.出版社}}</td>
+                                        <td>{{post.出版时间}}</td>
+                                        <td>{{post.馆藏复本}}</td>
+                                        <td>{{post.可借复本}}</td>
+                                    
+                                    </tr>
+                        </form>
+                                   {% endfor %}
+                                </tbody>
+                            </table>
+                        {% else %}
+
+
+   <div id="searchbar" class="search d1">
+      <form>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+          <input type="text" placeholder="请输入想要查询的书名、作者">
+          <button type="submit">搜索</button>
+      </form>
+    </div>
+
+
+<div id="banner" class="tm-content-box tm-banner margin-b-10">
+            <div class="tm-banner-inner">
+                <h1>公告栏</h1>
+<br>
+                    <a class="abc" href="http://paper.people.com.cn/rmrb/html/2017-12/13/nw.D110000renmrb_20171213_4-12.htm 
+
+">中国文学博鳌论坛开幕 <br></a>
+                    <a class="abc" href="http://news.sina.com.cn/o/2017-12-12/doc-ifypnqvn3357796.shtml 
+
+">范伯群， 一盏照亮文学的灯火<br></a>
+                    <a class="abc" href="http://news.sina.com.cn/o/2017-12-13/doc-ifypsvkp2596701.shtml 
+
+">“压寨夫人”：文学与想象中的绿林传奇<br></a>
+                    <a class="abc">牧羊少年奇幻之旅</a>
+
+            </div>
+
+<br><br><br><br><br><br><br>
+</div>
+</div>
+</div>
+
+                        {% endif %}
+
+
+                    </div>
+                </div>
+
+                <div class="tpl-alert"></div>
+
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

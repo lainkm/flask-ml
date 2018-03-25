@@ -1,0 +1,257 @@
+{% extends "base_layout.html"%}
+{% block body %}
+    <div class="tpl-page-container tpl-page-header-fixed">
+        <div class="tpl-left-nav tpl-left-nav-hover">
+            <div class="tpl-left-nav-title">
+                图书管理
+            </div>
+            <div class="tpl-left-nav-list">
+                <ul class="tpl-left-nav-menu">
+                    <li class="tpl-left-nav-item">
+                        <a href="/book_show" class="nav-link active">
+                            <i class="am-icon-home"></i>
+                            <span>图书信息总览</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/search_book_admin" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>快速查询</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/books_manage" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>图书信息编辑</span>
+                        </a>
+                    </li>
+
+                    <li class="tpl-left-nav-item">
+                        <a href="/sys_log" class="nav-link tpl-left-nav-link-list">
+                            <i class="am-icon-bar-chart"></i>
+                            <span>数据库备份</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+
+        <div class="tpl-content-wrapper">
+            
+            <div class="tpl-portlet-components">
+               
+                <div class="tpl-block">
+                    
+                    <div class="am-g">
+                {% if types == 0 %}
+                    <div class="am-u-sm-12">
+                                    <table class="am-table am-table-striped am-table-hover table-main">
+                                        <thead>
+                                            <tr>
+                                                <th class="table-check"><input type="checkbox" name="tr_all" class="tpl-table-fz-check", onclick="swapCheck()"></th>
+                                                <th class="table-id">图书ID</th>
+                                                <th class="table-title">图书分类号</th>
+                                                <th class="table-title">书名</th>
+
+                                                <th class="table-type">作者</th>
+                                                <th class="table-author am-hide-sm-only">出版社</th>
+                                                <th class="table-type">出版时间</th>
+                                                <th class="table-type">馆藏复本</th>
+                                                <th class="table-type">可借复本</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            {% for post in posts %}
+                                                <form class="am-form" action="" method="post">
+                                            <tr>
+                                                <label>
+                                                <td><input type="checkbox" name="tr" value="{{post.工号}}"></td>
+                                                </label>
+                                                
+                                                <td><input type="text" name="id" value="{{post.图书ID}}" {{readonly}}></td>
+
+                                                <td><input type="text" name="kind" value="{{post.图书分类号}}" {{readonly}}></td>
+                                                <td><input type="text" name="b_name" value="{{post.书名}}" {{readonly}}></td>
+                                                <td><input type="text" name="r_name" value="{{post.作者}}" {{readonly}}></td>
+                                                <td><input type="text" name="pub" value="{{post.出版社}}" {{readonly}}></td>
+                                                <td><input type="text" name="pub_time" value="{{post.出版时间}}" {{readonly}}></td>
+                                                <td><input type="text" name="all_num" value="{{post.馆藏复本}}" {{readonly}}></td>
+                                                <td><input type="text" name="avail_num" value="{{post.可借复本}}" {{readonly}}></td>
+                                            </tr>
+                                     </form>
+                                           {% endfor %}
+                                        </tbody>
+                                    </table>
+                {% elif types == 1 %}
+                    <div class="am-u-sm-12">
+
+                              <form action="" method="POST">
+                                <tr>
+
+                                <td>
+                                     <input type="text" name="content" value="">
+                                </td>
+                                <td>
+                                    <input type="submit" name="sub" value="搜索">
+                                </td><br>
+
+                                    </tr>
+                                  </form> 
+                        </div> 
+                {% elif types == 3 %}
+                    <div class="am-u-sm-12">
+                            <table>
+                            <tr>
+                                <form  class="am-form" action="" method="post">
+                                    <td>
+                                        <input type="submit" name="sub" value="新增">
+                                    </td>
+                                    <td>
+                                        <input type="submit" name="sub" value="批量删除">
+                                    </td>
+                                    <td>
+                                        <input type="text" name="content" value="">
+                                    </td>
+                                    <td>
+                                        <input type="submit" name="sub" value="搜索">
+                                    </td>
+                                </form>
+                            </tr>
+                        </table>
+
+                            <table class="am-table am-table-striped am-table-hover table-main">
+                                <thead>
+                                    <tr>
+                                        <th class="table-check"><input type="checkbox" name="tr_all" class="tpl-table-fz-check", onclick="swapCheck()"></th>
+                                        <th class="table-id">图书ID</th>
+                                        <th class="table-title">图书分类号</th>
+                                        <th class="table-title">书名</th>
+
+                                        <th class="table-type">作者</th>
+                                        <th class="table-author am-hide-sm-only">出版社</th>
+                                        <th class="table-type">出版时间</th>
+                                        <th class="table-type">馆藏复本</th>
+                                        <th class="table-type">可借复本</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for post in posts %}
+                        <form class="am-form" action="" method="post">
+                                    <tr>
+                                        <label>
+                                        <td><input type="checkbox" name="tr" value="{{post.工号}}"></td>
+                                        </label>
+                                        
+                                        <td><input type="text" name="id" value="{{post.图书ID}}" {{readonly}}></td>
+
+                                        <td><input type="text" name="kind" value="{{post.图书分类号}}" {{readonly}}></td>
+                                        <td><input type="text" name="b_name" value="{{post.书名}}" {{readonly}}></td>
+                                        <td><input type="text" name="r_name" value="{{post.作者}}" {{readonly}}></td>
+                                        <td><input type="text" name="pub" value="{{post.出版社}}" {{readonly}}></td>
+                                        <td><input type="text" name="pub_time" value="{{post.出版时间}}" {{readonly}}></td>
+                                        <td><input type="text" name="all_num" value="{{post.馆藏复本}}" {{readonly}}></td>
+                                        <td><input type="text" name="avail_num" value="{{post.可借复本}}" {{readonly}}></td>
+                                        <td><input type="submit" name="sub" value="删除"></td>
+                                        <td><input type="submit" name="sub" value="修改"></td>
+                                        <td><input type="submit" name="sub" value="确认"></td>
+
+                                    </tr>
+                        </form>
+                                   {% endfor %}
+                                </tbody>
+                            </table>
+                           
+
+                            <hr>
+
+                    <script type="text/javascript"  
+                        src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>  
+                  
+                    <script type="text/javascript">  
+                        //checkbox 全选/取消全选  
+                        var isCheckAll = false;  
+                        function swapCheck() {  
+                            if (isCheckAll) {  
+                                $("input[type='checkbox']").each(function() {  
+                                    this.checked = false;  
+                                });  
+                                isCheckAll = false;  
+                            } else {  
+                                $("input[type='checkbox']").each(function() {  
+                                    this.checked = true;  
+                                });  
+                                isCheckAll = true;  
+                            }  
+                        }  
+                    </script>  
+                        
+                    </div>
+
+                {% elif types == 6 %}
+                    <form action="" method="post">  
+                        <input type="submit" name="button" value="数据库备份到本地">
+                    </form>
+                {% elif types == 7 %}
+                    <div class="am-u-sm-12">
+
+                                <table class="am-table am-table-striped am-table-hover table-main">
+                                <thead>
+                                    <tr>
+                
+                                        <th class="table-id">图书ID</th>
+                                        <th class="table-title">图书分类号</th>
+                                        <th class="table-title">书名</th>
+
+                                        <th class="table-type">作者</th>
+                                        <th class="table-author am-hide-sm-only">出版社</th>
+                                        <th class="table-type">出版时间</th>
+                                        <th class="table-type">馆藏复本</th>
+                                        <th class="table-type">可借复本</th>
+
+                                    
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for post in posts %}
+                        <div class="am-u-sm-12">
+
+                            <form class="am-form" action="" method="post">
+                                        <tr>
+
+                                            <td>{{post.图书ID}}</td>
+                                            <td>{{post.图书分类号}}</td>
+                                            <td><a>{{post.书名}}</a></td>
+                                            <td><a>{{post.作者}}</a></td>
+                                            <td>{{post.出版社}}</td>
+                                            <td>{{post.出版时间}}</td>
+                                            <td>{{post.馆藏复本}}</td>
+                                            <td>{{post.可借复本}}</td>
+                                        
+                                        </tr>
+                            </form>
+                                       {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                {% else %}
+                    <div class="tpl-portlet-components"  >
+                        <h1 align="center">欢迎登录&nbsp;&nbsp;<span style="font-size: 35px;color: #0e90d2">图书管理员</span>&nbsp;&nbsp;图书管理系统</h1>
+                    </div>
+
+                {% endif %}
+                    </div>
+                </div>
+
+                <div class="tpl-alert"></div>
+
+                </div>
+        </div>
+    </div>
+
+{% endblock %}

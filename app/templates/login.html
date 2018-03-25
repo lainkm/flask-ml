@@ -1,0 +1,22 @@
+{% extends "base_layout.html"%}
+{% block body %}
+ <h2>用户登陆 | login</h2>
+  {% if error %}<div><strong>Error:</strong> {{ error }}</div>{% endif %}
+  <form action="" method="post">
+    <table>
+    <tr>
+      <td>账号：</td>
+      <td><input type="text" name="user_id" size="30" value="{{ request.form.user_id }}"></td>
+    </tr>
+    <tr>
+      <td>密码：</td>
+      <td><input type="password" name="user_password" size="30"></td>
+    </tr>
+    <tr>
+      <td><input type='radio' name='user_kind' value="reader">用户<br></td>
+      <td><input type='radio' name='user_kind' value="admin">管理员<br></td>
+    </tr>
+  </table>
+    <div class="actions"><input type="submit" value="登陆"></div>
+  </form>
+{% endblock %}
